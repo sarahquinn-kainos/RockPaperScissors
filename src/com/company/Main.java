@@ -40,17 +40,13 @@ public class Main {
         String username = usernameScanner.nextLine();
         for (Player player :
                 players) {
-            if (player.userName)
-            
+            if (player.userName.equals(username)){
+                System.out.println("Error. This username already exists");
+                menu();
+            }
         }
         Player player = new Player(username,0,0);
         players.add(player);
-<<<<<<< HEAD
-        //can't use taken username
-=======
-        //menu();
-
->>>>>>> c8049a5bc1186ed6d782a8d6ad8c4001a79489d1
     }
 
     public static void menu() {
@@ -170,8 +166,27 @@ public class Main {
                     players.get(i).currentWins +"         " +
                     players.get(i).currentLosses);
         System.out.println("==================================");
-
         }
     }
 
+    public static void startGame() {
+        int player1Choice = gameOptions();
+        int player2Choice = gameOptions();
+
+        if (player1Choice == player2Choice) {
+            System.out.println("Oh! It's a draw! Play again!");
+            startGame();
+        }
+        if (player1Choice > player2Choice || (player1Choice == 1 && player2Choice == 3)) {
+            playerWins(player1);
+        }
+        else {
+            playerWins(player2);
+        }
+
+    }
+
+    public static void playerWins(Player player) {
+        
+    }
 }
