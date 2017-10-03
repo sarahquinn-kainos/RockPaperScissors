@@ -38,8 +38,6 @@ public class Main {
         Scanner usernameScanner = new Scanner(System.in);
         String username = usernameScanner.nextLine();
 
-        Player player = new Player(username, 0, 0);
-
         for (Player player :
                 players) {
             if (player.userName.equals(username)){
@@ -47,16 +45,9 @@ public class Main {
                 menu();
             }
         }
-        Player player = new Player(username,0,0);
+        Player myPlayer = new Player(username,0,0);
 
-        players.add(player);
-
-
-        //can't use taken username
-
-        //menu();
-
-
+        players.add(myPlayer);
     }
 
     public static void menu() {
@@ -138,10 +129,6 @@ public class Main {
         if (players.get(selection) != null) {
             if (!players.get(selection).userName.equals(player1.userName)) {
                 player2 = players.get(selection);
-
-
-            } else {
-
                 startGame(player1,player2);
             }
             else {
@@ -181,15 +168,19 @@ public class Main {
         }
     }
 
-    public static void startGame() {
+    public static void startGame(Player player1,Player player2) {
         int player1Choice = gameOptions();
         int player2Choice = gameOptions();
 
         if (player1Choice == player2Choice) {
+            startGame(player1,player2);
             System.out.println("Oh! It's a draw! Play again!");
-            startGame();
-
-            System.out.println("==================================");
+            if (player1Choice > player2Choice || (player1Choice == 1 && player2Choice == 3)) {
+                playerWins(player1);
+            }
+            else {
+                playerWins(player2);
+            }
         }
     }
 
@@ -219,17 +210,10 @@ public class Main {
                 return (0);
             default:
                 System.out.println("\n Invalid Selection. TRY AGAIN");
+                System.out.println("==================================");
                 gameOptions();
                 return (0);
-
         }
-        if (player1Choice > player2Choice || (player1Choice == 1 && player2Choice == 3)) {
-            playerWins(player1);
-        }
-        else {
-            playerWins(player2);
-        }
-
     }
 
     public static void playerWins(Player player) {
