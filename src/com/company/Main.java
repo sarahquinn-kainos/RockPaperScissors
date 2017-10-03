@@ -5,6 +5,8 @@ import java.util.ArrayList;
 public class Main {
 
     public static ArrayList<Player> players = new ArrayList<Player>();
+    public static Player player1 = new Player();
+    public static Player player2 =new Player();
 
     public static void main(String[] args) {
     boolean firstGame = true;
@@ -19,12 +21,11 @@ public class Main {
             String username = setupScanner.nextLine();
             System.out.println("Please input Player 2\'s desired username");
             String username2 = setupScanner.nextLine();
-            Player player1 = new Player(username,0,0);
-            Player player2 = new Player(username2,0,0);
+            player1 = new Player(username,0,0);
+            player2 = new Player(username2,0,0);
             //startGame(player1,player2);//This method will also be used after players are selected
             players.add(player1);
             players.add(player2);
-
 
         }
         else {
@@ -43,17 +44,17 @@ public class Main {
 
     }
 
-    public static void menu(){
+    public static void menu() {
         Scanner menuScanner = new Scanner(System.in);
         System.out.println("\n" +
                 "======== Rock Paper Scissors Game ========" +
                 "\n" +
                 "\n\t(1) Create a new player" +
                 "\n\t(2) Select Players for new game" +
-                "\n\t(3) View Player stats"+
+                "\n\t(3) View Player stats" +
                 "\n\t(4) EXIT ");
         String menuSelect = menuScanner.nextLine();
-        switch (menuSelect){
+        switch (menuSelect) {
             case "1":
                 // run create player function
                 System.out.println("Player Created");
@@ -78,9 +79,76 @@ public class Main {
             default:
                 System.out.println("Invalid selection - Try Again: \n");
                 Main.menu();
-            Main.menu();
+                Main.menu();
         }
+    }
 
+    public static void selectPlayer1() {
+        System.out.println("Please select the number corresponding to player 1\'s username");
+        for (int i = 0; i < players.size(); i++) {
+            String message = String.format("Player "+i+": "+players.get(i).userName);
+            System.out.println(message);
+        }
+        int selection = 0;
+        Scanner selectScanner = new Scanner(System.in);
+        if (isInteger(selectScanner.next())){
+            selection = selectScanner.nextInt();
+        }
+        else {
+            System.out.println("Error. Please input a valid number");
+            selectPlayer1();
+        }
+        if (players.get(selection) != null){
+            player1 = players.get(selection);
+            selectPlayer2();
+        }
+        else {
+            System.out.println("Error. Please input a valid number");
+            selectPlayer1();
+        }
+    }
+
+    public static void selectPlayer2() {
+        System.out.println("Great! Now please select the number corresponding to player 2\'s username");
+        for (int i = 0; i < players.size(); i++) {
+            String message = String.format("Player "+i+": "+players.get(i).userName);
+            System.out.println(message);
+        }
+        int selection = 0;
+        Scanner selectScanner = new Scanner(System.in);
+        if (isInteger(selectScanner.next())){
+            selection = selectScanner.nextInt();
+        }
+        else {
+            System.out.println("Error. Please input a valid number");
+            selectPlayer2();
+        }
+        if (players.get(selection) != null){
+            if (!players.get(selection).userName.equals( player1.userName)){
+                player2 = players.get(selection);
+
+            }
+            else {
+                System.out.println("Error. You can't play against yourself! get a friend");
+                selectPlayer2();
+            }
+
+        }
+        else {
+            System.out.println("Error. Please input a valid number");
+            selectPlayer2();
+        }
+    }
+
+    public static boolean isInteger(String s) {
+        try {
+            Integer.parseInt(s);
+        } catch (NumberFormatException e) {
+            return false;
+        } catch (NullPointerException e) {
+            return false;
+        }
+        return true;
     }
 
     public static void showStats(){

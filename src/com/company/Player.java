@@ -5,6 +5,10 @@ public class Player {
     public int currentWins;
     public int currentLosses;
 
+    public Player(){
+
+    }
+
     public Player(String userName, int currentWins, int currentLosses) {
         this.userName = userName;
         this.currentWins = 0;
