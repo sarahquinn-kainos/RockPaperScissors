@@ -42,12 +42,15 @@ public class Main {
 
         for (Player player :
                 players) {
-            if (player.userName)
-            
+            if (player.userName.equals(username)){
+                System.out.println("Error. This username already exists");
+                menu();
+            }
         }
         Player player = new Player(username,0,0);
 
         players.add(player);
+
 
         //can't use taken username
 
@@ -173,6 +176,19 @@ public class Main {
             System.out.println(players.get(i).userName + "         " +
                     players.get(i).currentWins + "         " +
                     players.get(i).currentLosses);
+
+        System.out.println("==================================");
+        }
+    }
+
+    public static void startGame() {
+        int player1Choice = gameOptions();
+        int player2Choice = gameOptions();
+
+        if (player1Choice == player2Choice) {
+            System.out.println("Oh! It's a draw! Play again!");
+            startGame();
+
             System.out.println("==================================");
         }
     }
@@ -205,8 +221,19 @@ public class Main {
                 System.out.println("\n Invalid Selection. TRY AGAIN");
                 gameOptions();
                 return (0);
+
         }
+        if (player1Choice > player2Choice || (player1Choice == 1 && player2Choice == 3)) {
+            playerWins(player1);
+        }
+        else {
+            playerWins(player2);
+        }
+
     }
 
+    public static void playerWins(Player player) {
+        
+    }
 }
 
