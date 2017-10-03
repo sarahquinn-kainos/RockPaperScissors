@@ -26,6 +26,7 @@ public class Main {
             //startGame(player1,player2);//This method will also be used after players are selected
             players.add(player1);
             players.add(player2);
+
         }
         else {
             menu();
@@ -44,7 +45,12 @@ public class Main {
         }
         Player player = new Player(username,0,0);
         players.add(player);
+<<<<<<< HEAD
         //can't use taken username
+=======
+        //menu();
+
+>>>>>>> c8049a5bc1186ed6d782a8d6ad8c4001a79489d1
     }
 
     public static void menu() {
@@ -70,7 +76,8 @@ public class Main {
                 break;
             case "3":
                 //run Player Stats function
-                System.out.println("Player Stats Displayed");
+                showStats();
+
                 Main.menu();
                 break;
             case "4":
@@ -151,6 +158,20 @@ public class Main {
             return false;
         }
         return true;
+    }
+
+    public static void showStats(){
+        System.out.println("\n" +
+                "========== Player Stats ==========" +
+                "\n <Username>    <Wins>   <Losses>" +
+                "\n==================================");
+        for (int i = 0; i < players.size(); i++){
+            System.out.println(players.get(i).userName +"         " +
+                    players.get(i).currentWins +"         " +
+                    players.get(i).currentLosses);
+        System.out.println("==================================");
+
+        }
     }
 
 }
