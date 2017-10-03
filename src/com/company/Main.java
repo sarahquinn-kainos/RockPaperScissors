@@ -24,9 +24,9 @@ public class Main {
             String username2 = setupScanner.nextLine();
             player1 = new Player(username, 0, 0);
             player2 = new Player(username2, 0, 0);
-            //startGame(player1,player2);//This method will also be used after players are selected
             players.add(player1);
             players.add(player2);
+            startGame(player1,player2);//This method will also be used after players are selected
 
         } else {
             menu();
@@ -169,55 +169,64 @@ public class Main {
     }
 
     public static void startGame(Player player1,Player player2) {
-        int player1Choice = gameOptions();
-        int player2Choice = gameOptions();
+        int player1Choice = gameOptions(player1.userName);
+        int player2Choice = gameOptions(player2.userName);
 
         if (player1Choice == player2Choice) {
             startGame(player1,player2);
             System.out.println("Oh! It's a draw! Play again!");
             if (player1Choice > player2Choice || (player1Choice == 1 && player2Choice == 3)) {
                 playerWins(player1);
+                playerLoses(player2);
             }
             else {
                 playerWins(player2);
+                playerLoses(player1);
             }
         }
+        setupGame(false);
     }
 
-    public static int gameOptions() {
+    public static int gameOptions(String name) {
         System.out.println("\n" +
                 "\n==================================" +
+                "\n\n\n\n\n\n\n\n USER = " + name +
                 "\n==== Select a numbered option ====" +
                 "\n\t(1) ROCK" +
                 "\n\t(2) PAPER" +
                 "\n\t(3) SCISSORS" +
-                "\n\t(0) -cancel-" +
                 "\n==================================");
         Scanner optionScanner = new Scanner(System.in);
         String option = optionScanner.nextLine();
-        switch (option) {
-            case "1":
+
+            if (option== "1") {
                 return (1);
+            }
 
-            case "2":
+            if (option== "2") {
                 return (2);
+            }
 
-            case "3":
+            if (option== "3") {
                 return (3);
+            }
 
-            case "0":
-                Main.menu();
-                return (0);
-            default:
+            if (option !="1" ||option !="2" ||option !="3"){
                 System.out.println("\n Invalid Selection. TRY AGAIN");
                 System.out.println("==================================");
-                gameOptions();
+                startGame(player1,player2);
                 return (0);
-        }
+        } return(0);
     }
 
     public static void playerWins(Player player) {
-        
+        System.out.println("Congratulations! " + player.userName +" You won");
+        player.currentWins++;
+    }
+
+    public static void playerLoses(Player player) {
+        System.out.println("Sorry! " + player.userName +" You Lost");
+        player.currentLosses++;
     }
 }
 
