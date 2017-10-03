@@ -38,10 +38,19 @@ public class Main {
         System.out.println("Please input your desired username");
         Scanner usernameScanner = new Scanner(System.in);
         String username = usernameScanner.nextLine();
+        for (Player player :
+                players) {
+            if (player.userName)
+            
+        }
         Player player = new Player(username,0,0);
         players.add(player);
+<<<<<<< HEAD
+        //can't use taken username
+=======
         //menu();
 
+>>>>>>> c8049a5bc1186ed6d782a8d6ad8c4001a79489d1
     }
 
     public static void menu() {
@@ -57,12 +66,12 @@ public class Main {
         switch (menuSelect) {
             case "1":
                 // run create player function
-                System.out.println("Player Created");
+                CreatePlayer();
                 Main.menu();
                 break;
             case "2":
                 // run select player function
-                System.out.println("Player Selection Ran");
+                selectPlayer1();
                 Main.menu();
                 break;
             case "3":
@@ -126,7 +135,7 @@ public class Main {
         if (players.get(selection) != null){
             if (!players.get(selection).userName.equals( player1.userName)){
                 player2 = players.get(selection);
-
+                startGame(player1,player2);
             }
             else {
                 System.out.println("Error. You can't play against yourself! get a friend");
