@@ -24,7 +24,7 @@ public class Main {
             //startGame(player1,player2);//This method will also be used after players are selected
             players.add(player1);
             players.add(player2);
-            menu();
+
 
         }
         else {
